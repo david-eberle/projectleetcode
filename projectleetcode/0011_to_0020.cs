@@ -68,7 +68,7 @@ public partial class Program
 		return solution;
 	}
 
-	public static void current_Exercise0012()
+	public static void Exercise0012()
 	{
 		int num = 3;
 		Console.WriteLine("Solution found: " + IntToRoman(num));

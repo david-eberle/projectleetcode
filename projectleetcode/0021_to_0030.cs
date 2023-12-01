@@ -8,20 +8,79 @@ public partial class Program
 	public static void Exercise0021()
 	{
 	}
+
+    private static  void GenerateParenthesisRecursive(List<string> result, string current, int open, int close, int n)
+    {
+        if (current.Length == n * 2)
+        {
+            result.Add(current);
+            return;
+        }
+
+        if (open < n)
+        {
+            GenerateParenthesisRecursive(result, current + "(", open + 1, close, n);
+        }
+        if (close < open)
+        {
+            GenerateParenthesisRecursive(result, current + ")", open, close + 1, n);
+        }
+    }
+    
 	public static void Exercise0022()
 	{
-       
+		int n = 5;
+        List<string> result = new List<string>();
+        GenerateParenthesisRecursive(result, "", 0, 0, n);
+		result.ForEach(Console.WriteLine);
     }
     public static void Exercise0023()
 	{
 	}
 
-	public static void Exercise0024()
-	{
+    #region 0024
+    static void PrintList(ListNode head)
+    {
+        while (head != null)
+        {
+            Console.Write(head.val + " ");
+            head = head.next;
+        }
+        Console.WriteLine();
+    }
+    public static ListNode SwapPairs(ListNode head)
+    {
+        ListNode newNode = new ListNode(0, head);
+		ListNode pos = newNode;
 		
-	}
+        while (pos.next != null && pos.next.next != null)
+        {
+			ListNode temp1 = pos.next;
+            ListNode temp2 = pos.next.next;
+            ListNode temp3 = pos.next.next.next;
+            pos.next = temp2;
+            pos.next.next = temp1;
+            pos.next.next.next = temp3;
+            pos = pos.next.next;
+        }
+        return newNode.next;
+    }
+    public static void current_Exercise0024()
+	{
+		ListNode head = new ListNode(1);
+        ListNode node2 = new ListNode(2);
+        ListNode node3 = new ListNode(3);
+        ListNode node4 = new ListNode(4);
+        head.next = node2;
+        head.next.next = node3;
+        head.next.next.next = node4;
+		PrintList(head);
+		ListNode newHead = SwapPairs(head);
+        PrintList(newHead);
+    }
+    #endregion
 
-	public static void Exercise0025()
+    public static void Exercise0025()
 	{	
 		
 	}
