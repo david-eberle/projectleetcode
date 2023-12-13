@@ -5,10 +5,58 @@ using System.Text;
 
 public partial class Program
 {
-	public static void Exercise0021()
+    #region exercise 21
+    public static ListNode MergeTwoLists(ListNode list1, ListNode list2)
+    {
+        ListNode temp = new ListNode(-101, null);
+        ListNode p1, p2;
+        if(list1 != null && (list2 == null || list1.val < list2.val)){
+            p1 = list1;
+            p2 = list2;
+        }
+        else
+        {
+            p2 = list1;
+            p1 = list2;
+        }
+        ListNode result = new ListNode();
+        result = p1;
+        temp.next = result;
+        if(p1 != null)
+            p1 = p1.next;
+        while (p1 != null || p2 != null) {
+            if (p1 != null && ((p2 != null && p1.val < p2.val) || (p2 == null)))
+            {
+                result.next = p1;
+                p1 = p1.next;
+                result = result.next;
+            }
+            else// if (p2 != null && ((p1 != null && p2.val < p1.val) || (p1 == null)))
+            {
+                result.next = p2;
+                p2 = p2.next;
+                result = result.next;
+            }
+        }
+        return temp.next;
+    }
+    public static void current_Exercise0021()
 	{
-	}
+		ListNode result = new ListNode();
+        ListNode l1 = new ListNode(1, null);
+		ListNode l2 = new ListNode(5, null);
+        ListNode l3 = new ListNode(7, null);
+        ListNode l4 = new ListNode(3, null);
+        ListNode l5 = new ListNode(4, null);
+        ListNode l6 = new ListNode(4, null);
+        l1.next = l2;
+        l2.next = l3;
+        l4.next = l5;
+        l5.next = l6;
 
+		PrintList(MergeTwoLists(l1, l4));
+    }
+    #endregion
     private static  void GenerateParenthesisRecursive(List<string> result, string current, int open, int close, int n)
     {
         if (current.Length == n * 2)
@@ -65,7 +113,7 @@ public partial class Program
         }
         return newNode.next;
     }
-    public static void current_Exercise0024()
+    public static void Exercise0024()
 	{
 		ListNode head = new ListNode(1);
         ListNode node2 = new ListNode(2);

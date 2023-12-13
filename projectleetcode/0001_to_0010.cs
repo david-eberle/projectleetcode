@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 public partial class Program
 {
@@ -102,7 +103,7 @@ public partial class Program
     }
     public static void Exercise0005()
     {
-        string s = "cstgvkbrxacmpxdxxktktvpdzcuxmnhvuxdgsmskgeeawzeikhtmhdvnccbrgifpzmiuytfmeyfoxsntrdtxeuxcqsndexbgfxnthqwveujqzemloooyddparbjcuiwpopjwvvmwblsamkhjhlnoxinkpsempexmipifsfwzxbetgvfnkngzxcpizwctpdlpngjpyovmjllxfiwktghkxvyelwjwdztujmunijfsfdvmhgqhlpouewgyznphlmccjmqaqncwbeqheohibafqfunfywmrvqvjygjwqoclijwkcfiuaiymeagdbwyejnvtosxylptbtyoahfzfmwzrkhzdamknleroffmsqcaryibamgdpcumlhrblypddzhaxfeztokgogzgvpfvlmetiwsamhdidmvxavleryfyakendwrbslcavlqkerrnvpuzhdgwzuyorxzbkzhxhpbvkflgxouvaavxrdzsjlgrmogzvlhhdidldsxqhrqlryaanffhxnutcycnczuedtrwcnfiqrtoafvdfnfhxhyjivzalozrbrajboecfyalisxxanduzraqdrbzsbkobaieqpzcawrunxucypqyjnmrlrlivrrwwhdpekeelsphhunzbhkkejvqfopjsuholutgmtnleqdrntbqgrobnuhqpdkbjtikijkdiwqvnxgajaaqgswrdamzv";
+        string s = "busislnescsicxpvvysuqgcudefrfjbwwjcchtgqyajdfwvkypfwshnihjdztgmyuuljxgvhdiwphrweyfkbnjgerkmifbirubhseuhrugwrabnjafnbdfjnufdstjbkuwtnpflffaqmjbhssjlnqftgjiglvvequhapasarlkcvbmkwnkuvwktbgfoaxteprobdwswcdyddyvrehvmxrrjiiidatidlpihkbmmruysmhhsncmfdanafdrfpdtfgkglcqpwrrtvacuicohspkounojuziittugpqjyhhkwfnflozbispehrtrnizowrlzcuollagxwtznjwzcumvedjwokueuqktvvouwnsmpxqvvpuwprezrbobrpnwaccwljchdguubjulyilzvmandjjleitweybqkjttschrjjlebnmponvlktzzcdtuybugggcqffkcffpamauvxfbonjrobgpvlyzveiwemmtdvbjciaytvesnocnjrwodtcokgcuoiicxapmrzpkfphjniuvzjrhbnqndfshoduejyktebgdabidxlkstepuwvtrtgbxaeheylicvhrxddijshcvdadxzsccmainyfpfdhqdanfccqkzlmhsfilvoybqojlvbcixjzqpbngdvesuokbxhkomsiqfyukvspqthlzxdnlwthrgaxhtpjzhrugqbfokrdcyurivmzgtynoqfjbafboselxnfupnpqlryvlcxeksirvufepfwczosrrjpudbwqxwldgjyfjhzlzcojxyqjyxxiqvfhjdwtgoqbyeocffnyxhyyiqspnvrpxmrtcnviukrjvpavervvztoxajriuvxqveqsrttjqepvvahywuzwtmgyrzduxfqspeipimyoxmkadrvrdyefekjxcmsmzmtbugyckcbjsrymszftjyllfmoeoylzeahnrxlxpnlvlvzltwnmldi";
         string max = "";
         string current = "";
         if (s.Length >= 2 && s[0] == s[1])
@@ -113,12 +114,13 @@ public partial class Program
             for (int middle = 1; middle < s.Length; middle++)
             {
                 int ratio = max.Length / 2;
-                Console.WriteLine("max: " + max + ", ratio: " + ratio.ToString());
                 while (middle - ratio >=0 && middle + ratio < s.Length)
                 {
+                    /*
                     current = s.Substring(middle, ratio + 1);
                     if (current == Reverse(current) && current.Length > max.Length)
                         max = current;
+                    */
                     current = s.Substring(middle - ratio, 2 * ratio + 1);
                     if (current == Reverse(current) && current.Length > max.Length)
                         max = current;
@@ -215,7 +217,39 @@ public partial class Program
     }
     public static void Exercise0008()
     {
-
+        string s = "  0000000000012345678";
+        string result = "";
+        int sign = 1, pos = 0;
+        // ignore whitespace and find sign
+        for (pos = 0; pos < s.Length; pos++)
+        {
+            if (s[pos] != ' ')
+            {
+                if (s[pos] == '-')
+                {
+                    sign = -1;
+                    pos++;
+                    break;
+                }
+                if (s[pos] == '+')
+                {
+                    pos++;
+                    break;
+                }
+                break;
+            }
+        }
+        int qNumbers = 0;
+        while (pos < s.Length && s[pos] >= '0' && s[pos] <= '9' && Int64.Parse("0" + result) < 2147483648)
+        {
+            result += s[pos];
+            pos++;
+            qNumbers++;
+        }
+        Int64 temp = Int64.Parse("0" + result) * sign;
+        temp = (temp < -2147483648) ? -2147483648 : temp;
+        temp = (temp > 2147483647) ? 2147483647 : temp;
+        Console.WriteLine(Int32.Parse(temp.ToString()));
     }
     public static void Exercise0009()
     {

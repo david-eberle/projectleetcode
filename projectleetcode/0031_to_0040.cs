@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+
 public partial class Program
 {
 	public static void Exercise0031()
@@ -9,9 +11,93 @@ public partial class Program
 	public static void Exercise0032()
 	{
 	}
-	public static void Exercise0033()
+    #region 33
+    public static int SearchValue(int[] nums, int target)
+    {
+		int sup = nums.Length - 1;
+		int inf = 0;
+		int medio = 0;
+
+        while (inf < sup)
+		{
+            medio = inf + (sup - inf) / 2;
+            if (nums[medio] == target)
+            {
+                return medio;
+            }
+            else if (nums[medio] < target)
+            {
+                inf = medio + 1;
+            }
+            else
+            {
+                sup = medio - 1;
+            }
+        }
+        medio = inf + (sup - inf) / 2;
+        if (nums[medio] == target)
+        {
+            return medio;
+        }
+        return -1;
+    }
+    public static int FindMiddle(int[] nums)
+    {
+        int sup = nums.Length - 1;
+        int inf = 0;
+		int target = nums[0];
+        while (inf < sup)
+        {
+            int medio = inf + (sup - inf) / 2;
+            if (nums[medio] > target && nums[medio + 1] < target)
+            {
+                return medio;
+            }
+            else if (nums[medio] < target)
+            {
+                inf = medio + 1;
+            }
+            else
+            {
+                sup = medio - 1;
+            }
+
+        }
+        return -1;
+    }
+
+    public static void Exercise0033()
 	{
-	}
+		int[] nums = { 4, 5, 6, 7, 0, 1, 2 };
+		int target = 3;
+		/*if (nums.Length == 0 || (nums.Length == 1 && nums[0] != target))
+			return -1;
+        if (nums.Length == 1 && nums[0] == target)
+            return 0;
+		*/
+        if (nums[0] < nums[nums.Length - 1])
+		{
+			Console.WriteLine(SearchValue(nums, target));
+		}
+        else
+        {
+            int middle = FindMiddle(nums);
+			if (target < nums[0])
+			{
+				int[] numsSub =  new int[nums.Length - middle - 1];
+                Array.Copy(nums, middle + 1, numsSub, 0, nums.Length - middle - 1);
+				int value = SearchValue(numsSub, target);
+				Console.WriteLine(value + ((value > -1)?  middle + 1:0));
+            }
+            else
+			{
+                int[] numsSub = new int[middle + 1];
+                Array.Copy(nums, 0, numsSub, 0, middle + 1);
+                Console.WriteLine(SearchValue(numsSub, target));
+            }
+        }
+    }
+	#endregion
 	public static void Exercise0034()
 	{
 		
