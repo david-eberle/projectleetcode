@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 public partial class Program
 {
@@ -91,16 +92,28 @@ public partial class Program
         }
         Console.WriteLine(max);
     }
+
+    #region Exercise 0004
+    public static double FindMedianSortedArrays(int[] nums1, int[] nums2)
+    {
+        int[] mergedArray = nums1.Concat(nums2).ToArray();
+        Array.Sort(mergedArray);
+        if(mergedArray.Length % 2 == 1) { 
+            return mergedArray[(mergedArray.Length + 1)/2 - 1];
+        }
+        else
+        {
+            return (double)(mergedArray[(mergedArray.Length) / 2] + mergedArray[(mergedArray.Length) / 2 - 1]) / 2;
+        }
+    }
     public static void Exercise0004()
     {
+        int[] nums1 = { 1, 3, 5 };
+        int[] nums2 = { 2 };
+        Console.WriteLine(FindMedianSortedArrays(nums1, nums2));
+    }
 
-    }
-    public static string Reverse(string s)
-    {
-        char[] charArray = s.ToCharArray();
-        Array.Reverse(charArray);
-        return new string(charArray);
-    }
+    #endregion
     public static void Exercise0005()
     {
         string s = "busislnescsicxpvvysuqgcudefrfjbwwjcchtgqyajdfwvkypfwshnihjdztgmyuuljxgvhdiwphrweyfkbnjgerkmifbirubhseuhrugwrabnjafnbdfjnufdstjbkuwtnpflffaqmjbhssjlnqftgjiglvvequhapasarlkcvbmkwnkuvwktbgfoaxteprobdwswcdyddyvrehvmxrrjiiidatidlpihkbmmruysmhhsncmfdanafdrfpdtfgkglcqpwrrtvacuicohspkounojuziittugpqjyhhkwfnflozbispehrtrnizowrlzcuollagxwtznjwzcumvedjwokueuqktvvouwnsmpxqvvpuwprezrbobrpnwaccwljchdguubjulyilzvmandjjleitweybqkjttschrjjlebnmponvlktzzcdtuybugggcqffkcffpamauvxfbonjrobgpvlyzveiwemmtdvbjciaytvesnocnjrwodtcokgcuoiicxapmrzpkfphjniuvzjrhbnqndfshoduejyktebgdabidxlkstepuwvtrtgbxaeheylicvhrxddijshcvdadxzsccmainyfpfdhqdanfccqkzlmhsfilvoybqojlvbcixjzqpbngdvesuokbxhkomsiqfyukvspqthlzxdnlwthrgaxhtpjzhrugqbfokrdcyurivmzgtynoqfjbafboselxnfupnpqlryvlcxeksirvufepfwczosrrjpudbwqxwldgjyfjhzlzcojxyqjyxxiqvfhjdwtgoqbyeocffnyxhyyiqspnvrpxmrtcnviukrjvpavervvztoxajriuvxqveqsrttjqepvvahywuzwtmgyrzduxfqspeipimyoxmkadrvrdyefekjxcmsmzmtbugyckcbjsrymszftjyllfmoeoylzeahnrxlxpnlvlvzltwnmldi";

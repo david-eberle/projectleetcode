@@ -76,40 +76,27 @@ public partial class Program
         return result;
     }
 
-    //	public static int getDivisorsCount(long value)
-    //{
-    //	int quantity = 1;
-    //	for (int i = 1; i < (value / 2) + 1; i++)
-    //	{
-    //		if ((value % i) == 0)
-    //		{
-    //			quantity++;
-    //		}
-    //	}
-    //	return quantity;
-    //}
-
     public static string ConvertNumberToWords(int number)
     {
-        if (number < 0 || number > 1000)
-        {
-            throw new ArgumentOutOfRangeException("number", "Number must be between 0 and 1000.");
-        }
+        //if (number < 0 || number > 1000)
+        //{
+        //    throw new ArgumentOutOfRangeException("number", "Number must be between 0 and 1000.");
+        //}
 
-        if (number < 20)
-        {
-            return units[number];
-        }
+        //if (number < 20)
+        //{
+        //    return units[number];
+        //}
 
-        if (number < 100)
-        {
-            return tens[number / 10] + ((number % 10 != 0) ? " " + units[number % 10] : "");
-        }
+        //if (number < 100)
+        //{
+        //    return tens[number / 10] + ((number % 10 != 0) ? " " + units[number % 10] : "");
+        //}
 
-        if (number < 1000)
-        {
-            return units[number / 100] + " hundred" + ((number % 100 != 0) ? " and " + ConvertNumberToWords(number % 100) : "");
-        }
+        //if (number < 1000)
+        //{
+        //    return units[number / 100] + " hundred" + ((number % 100 != 0) ? " and " + ConvertNumberToWords(number % 100) : "");
+        //}
 
         return "one thousand";
     }
@@ -252,5 +239,24 @@ public partial class Program
         return result.ToString();
     }
 
+    public static void printGrid(int[][] grid)
+    {
+        for (int i = 0; i < grid.Length; i++)
+        {
+            for (int j = 0; j < grid[i].Length; j++)
+            {
+                Console.Write(grid[i][j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+
+    public static void printStringIList(IList<string> array)
+    {
+        for (int i = 0; i < array.Count; i++)
+        {
+            Console.Write(array[i] + " ");
+        }
+    }
 }
 

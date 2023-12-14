@@ -40,7 +40,7 @@ public partial class Program
         }
         return temp.next;
     }
-    public static void current_Exercise0021()
+    public static void Exercise0021()
 	{
 		ListNode result = new ListNode();
         ListNode l1 = new ListNode(1, null);

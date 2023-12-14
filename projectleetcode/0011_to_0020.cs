@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
+using System.Transactions;
 
 public partial class Program
 {
@@ -123,7 +126,7 @@ public partial class Program
 		}
 	}
 
-	/// Solution for exercise 15
+	#region Solution for exercise 15
 	public static IList<IList<int>> ThreeSum(int[] nums)
 	{
 		if (nums.Length < 3)
@@ -172,17 +175,111 @@ public partial class Program
 			Console.WriteLine();
 		}
 	}
+    #endregion
+    #region exercise16
+    public static int ThreeSumClosest(int[] nums, int target)
+    {
+        int i = 0, j = 1, k = 2;
+		int current = 0, currentDif = 10000001, temp;
+		while (k < nums.Length)
+		{
+			temp = nums[i] + nums[j] + nums[k];
+			
+			if (Math.Abs(temp - target) < currentDif)
+			{
+				currentDif = Math.Abs(temp - target);
+				current = temp;
+            }
+			if (target == current)
+				return target;
+			k++;
+			if (k == nums.Length)
+			{
+				j++;
+				k = j + 1;
+			}
+            if (j == nums.Length -1)
+            {
+				i++;
+                j = i+1;
+                k = j + 1;
+            }
+        }
+        return current;
+    }
 
-	public static void Exercise0016()
+    public static void Exercise0016()
 	{
-		
+		int[] nums = { 2, 3, 8, 9, 10 };
+		int target = 16;
+		// devolver 2921 en lugar de 410
+		Console.Write(ThreeSumClosest(nums, target));
 	}
+	#endregion
 
-	public static void Exercise0017()
+	#region 0017
+	static IList<string> result0017 = new List<string>();
+    public static void recursiveComination(string[][] values, string current, int index)
 	{
-		
-	}
-	public static void Exercise0018()
+		index++;
+		if(index < values.Length)
+		for (int digit = 0; digit < values[index].Length; digit++)
+		{
+			recursiveComination(values, current + values[index][digit], index);
+		}
+		if(current.Length == values.Length)
+			result0017.Add(current);
+    }
+
+    public static IList<string> LetterCombinations(string digits)
+    {
+		if (digits.Length > 0)
+		{
+			string[][] values = new string[digits.Length][];
+			for(int digit = 0; digit < digits.Length;digit++)
+			{
+				switch(digits[digit])
+				{
+                    case '2':
+                        values[digit] = new string[3] { "a", "b", "c" };
+                        break;
+                    case '3':
+                        values[digit] = new string[3] { "d", "e", "f" };
+                        break;
+                    case '4':
+                        values[digit] = new string[3] { "g", "h", "i" };
+                        break;
+                    case '5':
+                        values[digit] = new string[3] { "j", "k", "l" };
+                        break;
+                    case '6':
+                        values[digit] = new string[3] { "m", "n", "o" };
+                        break;
+                    case '7':
+                        values[digit] = new string[4] { "p", "q", "r", "s" };
+                        break;
+                    case '8':
+                        values[digit] = new string[3] { "t", "u", "v" };
+                        break;
+                    case '9':
+                        values[digit] = new string[4] { "w", "x", "y", "z" };
+                        break;
+                }
+            }
+			for (int digit = 0; digit < values[0].Length; digit++)
+			{
+                recursiveComination(values, values[0][digit], 0);
+			}
+		}
+        return result0017;
+    }
+    public static void current_Exercise0017()
+	{
+		string digits = "23";
+		printStringIList(LetterCombinations(digits));
+    }
+    #endregion 0017
+    public static void Exercise0018()
 	{
 		
 	}
